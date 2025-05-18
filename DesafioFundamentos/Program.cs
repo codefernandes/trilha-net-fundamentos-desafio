@@ -3,57 +3,62 @@
 // Coloca o encoding para UTF8 para exibir acentuação
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-decimal precoInicial = 0;
-decimal precoPorHora = 0;
-
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
-
-Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
-
-// Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
-
-string opcao = string.Empty;
 bool exibirMenu = true;
 
-// Realiza o loop do menu
+decimal valorInicial = 0;
+decimal valorHora = 0;
+
+
+Console.WriteLine("====== Seja bem vindo ao nosso estacionamento ======");
+Console.WriteLine("Entre com o valor inicial: ");
+valorInicial = Convert.ToDecimal(Console.ReadLine());
+
+Console.WriteLine("Entre com o valor por hora: ");
+valorHora = Convert.ToDecimal(Console.ReadLine());
+Console.Clear();
+
+// Instancia a classe Estacionamento, já com os valores obtidos anteriormente
+Estacionamento es = new Estacionamento(valorInicial, valorHora);
+
 while (exibirMenu)
 {
-    Console.Clear();
-    Console.WriteLine("Digite a sua opção:");
-    Console.WriteLine("1 - Cadastrar veículo");
-    Console.WriteLine("2 - Remover veículo");
-    Console.WriteLine("3 - Listar veículos");
+    Console.WriteLine("====== Selecione uma Opção ======");
+    Console.WriteLine("1 - Cadastrar Veículo");
+    Console.WriteLine("2 - Remover Veículo");
+    Console.WriteLine("3 - Listar Veículos");
     Console.WriteLine("4 - Encerrar");
+    string? opcao = Console.ReadLine();
 
-    switch (Console.ReadLine())
+    switch (opcao)
     {
-        case "1":
+        case "1": // Cadastrar veículo
             es.AdicionarVeiculo();
+
             break;
 
-        case "2":
+        case "2": // Remover veículo
+
             es.RemoverVeiculo();
+
             break;
 
-        case "3":
+        case "3": // Listar veículos
+
             es.ListarVeiculos();
+
             break;
 
-        case "4":
-            exibirMenu = false;
+        case "4": // Sair do Sistema
+            Environment.Exit(0);
             break;
 
         default:
-            Console.WriteLine("Opção inválida");
+            Console.WriteLine("Opção inválida!");
+            Console.WriteLine("(Pressione qualquer tecla para continuar...)");
+            Console.ReadKey();
+            Console.Clear();
             break;
     }
 
-    Console.WriteLine("Pressione uma tecla para continuar");
-    Console.ReadLine();
-}
 
-Console.WriteLine("O programa se encerrou");
+}
